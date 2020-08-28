@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
+using System.Drawing.Text;
+using System.Globalization;
 
 namespace List
 {
@@ -16,34 +18,38 @@ namespace List
         Graphics g; //declare a graphics object called g
         Spaceship spaceship = new Spaceship();//create object called spaceship 
                                               //declare a list  missiles from the missile class
+        
         List<Missile> missiles = new List<Missile>();
         // declare space for an array of 7 objects called planet 
         List<Planet> planets = new List<Planet>();
+        List<Boss> boss = new List<Boss>();
         Random yspeed = new Random();
+        Random bossMovement = new Random();
 
 
         bool left, right,stop;
+        bool leftDetect = true;
+        bool rightDetect = false;
         string move;
         int score = 0;
         int spaceshipID = 1;
         int lives = 10;
         int Missiles = 20;
         int level = 1;
+        int bossy = 0;
+        int bossMove;
         public int x, y, width, height;//variables for the rectangle
         bool checkMissileCount = true;
         bool otherCheckMissileCount = true;
         bool Startgame = false;
-        
+        bool Bosslevel = false;
+        bool planetenable = true;
+
         Random planetspeed = new Random();
-
-
-
-
-
+        Random bossstation = new Random();
 
         public Form1()
         {
-
             InitializeComponent();
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlGame, new object[] { true });
 
@@ -54,14 +60,13 @@ namespace List
                 planets.Add(new Planet(displacement));
 
             }
+            TmrBoss.Enabled = false;
 
-        
         }
-
-            private void Form1_Paint(object sender, PaintEventArgs e)
+        private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            
-                g = e.Graphics;
+
+            g = e.Graphics;
             if (Startgame == true)
             {
                 spaceship.drawSpaceship(g, spaceshipID);
@@ -73,18 +78,20 @@ namespace List
 
                     }
                 }
+
             }
-
-
+           
+            if (planetenable == true)
+            {
 
                 foreach (Planet p in planets)
                 {
-                if (Startgame == true)
-                {
-                    p.draw(g);//Draw the planet
-                    p.movePlanet(g);//move the planet\
-                }
-                                    //if the planet reaches the bottom of the form relocate it back to the top
+                    if (Startgame == true)
+                    {
+                        p.draw(g);//Draw the planet
+                        p.movePlanet(g);//move the planet\
+                    }
+                    //if the planet reaches the bottom of the form relocate it back to the top
                     if (p.y >= ClientSize.Height && stop == false)
                     {
                         p.y = -20;
@@ -98,14 +105,29 @@ namespace List
                         txtLives.Text = lives.ToString();// display number of lives
                         CheckLives();
                     }
-                    if (Missiles <= 0)
+                    if (Bosslevel == true)
+                    {
+                        foreach (Boss b in boss)
+                        {
+                            b.drawBosscraft(g);
+                            bossy = bossstation.Next(10, 300);
+
+
+                            if (b.y >= ClientSize.Height && stop == false)
+                            {
+                                b.y = -20;
+                            }
+                        }
+                    }
+
+                        if (Missiles <= 0)
                     {
                         p.y = -30;
-                    break;
+                        break;
                     }
                 }
             }
-        
+        }
         private void Checkmissiles()
         {
             if (Missiles == 0 && checkMissileCount == true)
@@ -113,29 +135,37 @@ namespace List
                 checkMissileCount = false;
                 MessageBox.Show("next level");
                 level += 1;
+                lives = 50;
+                Missiles = 100;
+                Bosslevel = true;
+                planetenable = false;
 
+                TmrBoss.Enabled = true;
 
+                bossframe.Visible = true;
+                bossframe.BackgroundImage = Properties.Resources.Boss;
 
+                //laserframe.Visible = true;
+                //laserframe.BackgroundImage = Properties.Resources.laser;
 
             }
             if (Missiles == 0 && checkMissileCount == false)
             {
                 otherCheckMissileCount = false;
+
             }
             txtMissiles.Text = Missiles.ToString();// display number of missiles
 
-            if (Missiles == 0 && TmrPlanet.Enabled == true)
+            if (Missiles == 0 && TmrMeteor.Enabled == true)
             {
-                TmrPlanet.Enabled = false;
+                TmrMeteor.Enabled = false;
             }
         }
-
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
             spaceship.moveSpaceship(e.X);
            
         }
-
         private void Form2_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -148,7 +178,6 @@ namespace List
 
             }
         }
-
         private void Form2_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Left) { left = true; }
@@ -162,28 +191,23 @@ namespace List
                 Checkmissiles();
 
             }
-            
-
+           
         }
-
         private void Form2_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Left) { left = false; }
             if (e.KeyData == Keys.Right) { right = false; }
             if (e.KeyData == Keys.Enter) { Startgame = false; }
         }
-
         private void txtUserame_TextChanged(object sender, EventArgs e)
+
         {
             if (!System.Text.RegularExpressions.Regex.IsMatch(txtuserame.Text, "^[a-zA-Z ]"))
             {
                 MessageBox.Show("This textbox accepts only alphabetical characters");
                 txtuserame.Text.Remove(txtuserame.Text.Length -5);
-               
             }
-            
         }
-
         private void stsgame_Click(object sender, EventArgs e)
         {
             Startgame = true;
@@ -193,11 +217,9 @@ namespace List
             spaceshipDisplay.Visible = false;
             BtnBack.Visible = false;
             btnChange.Visible = false;
-           
             
         }
-
-        private void tmrMissiles_Tick(object sender, EventArgs e)
+        private void TmrMissiles_Tick(object sender, EventArgs e)
         {
             if( Missiles <= 1)
             {
@@ -210,7 +232,6 @@ namespace List
                 }
             }
         }
-
         private void btnChange_Click(object sender, EventArgs e)
         {
 
@@ -234,10 +255,8 @@ namespace List
             {
                 spaceshipDisplay.BackgroundImage = Properties.Resources.spaceship_blue;
                 spaceshipID = 1;
-
             }
         }
-
         private void BtnBack_Click(object sender, EventArgs e)
         {
             if (spaceshipID == 2)
@@ -261,12 +280,23 @@ namespace List
                 spaceshipID = 4;
             }
         }
-
         private void PnlGame_Paint(object sender, PaintEventArgs e)
         {
 
         }
+        private void TmrBoss_Tick(object sender, EventArgs e)
+        {
 
+            bossMove = bossMovement.Next(-40, 40);
+            if (bossframe.Location.X < 850 && bossframe.Location.X > 50)
+            {
+                bossframe.Left += bossMove;
+            }
+        }
+        private void stsgame_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+        }
         private void TmrShip_Tick(object sender, EventArgs e)
         {
             if (right) // if right arrow key pressed
@@ -279,13 +309,12 @@ namespace List
                 move = "left";
                 spaceship.MoveSpaceship(move);
             }
-
         }
         private void CheckLives()
         {
             if (lives == 0)
             {
-                TmrPlanet.Enabled = false;
+                TmrMeteor.Enabled = false;
                 TmrShip.Enabled = false;
                 stop = true;
                 Missiles = 0;
@@ -294,21 +323,17 @@ namespace List
 
             }
         }
-
-        private void TmrPlanet_Tick(object sender, EventArgs e)
+        private void TmrMeteor_Tick(object sender, EventArgs e)
         {
            
         }
-
-
-        private void Form2_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             txtLives.Text = lives.ToString();// display number of lives
           
            
         }
-
-        private void tmrShoot_Tick(object sender, EventArgs e)
+        private void TmrShoot_Tick(object sender, EventArgs e)
         {
             foreach (Planet p in planets)
             {
@@ -339,7 +364,5 @@ namespace List
             this.Invalidate();
            
         }
-
-        
     }
 }

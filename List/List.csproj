@@ -46,12 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Boss.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Meteor.cs" />
     <Compile Include="Missile.cs" />
     <Compile Include="Planet.cs" />
     <Compile Include="Program.cs" />
@@ -118,6 +120,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\spaceship_green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pngwave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\laser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\laser-removebg-preview %281%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

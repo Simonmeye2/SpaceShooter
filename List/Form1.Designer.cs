@@ -29,29 +29,33 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tmrShoot = new System.Windows.Forms.Timer(this.components);
+            this.TmrShoot = new System.Windows.Forms.Timer(this.components);
             this.TmrShip = new System.Windows.Forms.Timer(this.components);
             this.LblScore = new System.Windows.Forms.Label();
             this.txtScore = new System.Windows.Forms.Label();
             this.LblLives = new System.Windows.Forms.Label();
             this.Userame = new System.Windows.Forms.Label();
-            this.TmrPlanet = new System.Windows.Forms.Timer(this.components);
+            this.TmrMeteor = new System.Windows.Forms.Timer(this.components);
             this.txtuserame = new System.Windows.Forms.TextBox();
             this.stsgame = new System.Windows.Forms.Button();
-            this.tmrMissiles = new System.Windows.Forms.Timer(this.components);
+            this.TmrMissiles = new System.Windows.Forms.Timer(this.components);
             this.txtLives = new System.Windows.Forms.Label();
             this.txtMissiles = new System.Windows.Forms.Label();
             this.btnChange = new System.Windows.Forms.Button();
             this.spaceshipDisplay = new System.Windows.Forms.PictureBox();
             this.BtnBack = new System.Windows.Forms.Button();
             this.PnlGame = new System.Windows.Forms.Panel();
+            this.bossframe = new System.Windows.Forms.PictureBox();
+            this.TmrBoss = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.spaceshipDisplay)).BeginInit();
+            this.PnlGame.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bossframe)).BeginInit();
             this.SuspendLayout();
             // 
-            // tmrShoot
+            // TmrShoot
             // 
-            this.tmrShoot.Enabled = true;
-            this.tmrShoot.Tick += new System.EventHandler(this.tmrShoot_Tick);
+            this.TmrShoot.Enabled = true;
+            this.TmrShoot.Tick += new System.EventHandler(this.TmrShoot_Tick);
             // 
             // TmrShip
             // 
@@ -87,11 +91,11 @@
             this.LblLives.AutoSize = true;
             this.LblLives.BackColor = System.Drawing.Color.Transparent;
             this.LblLives.ForeColor = System.Drawing.SystemColors.Control;
-            this.LblLives.Location = new System.Drawing.Point(403, 9);
+            this.LblLives.Location = new System.Drawing.Point(19, 89);
             this.LblLives.Name = "LblLives";
-            this.LblLives.Size = new System.Drawing.Size(32, 13);
+            this.LblLives.Size = new System.Drawing.Size(22, 13);
             this.LblLives.TabIndex = 2;
-            this.LblLives.Text = "Lives";
+            this.LblLives.Text = "HP";
             // 
             // Userame
             // 
@@ -105,11 +109,11 @@
             this.Userame.Text = "UsernName ( is required before start)";
             this.Userame.Click += new System.EventHandler(this.txtUserame_TextChanged);
             // 
-            // TmrPlanet
+            // TmrMeteor
             // 
-            this.TmrPlanet.Enabled = true;
-            this.TmrPlanet.Interval = 10000;
-            this.TmrPlanet.Tick += new System.EventHandler(this.TmrPlanet_Tick);
+            this.TmrMeteor.Enabled = true;
+            this.TmrMeteor.Interval = 10000;
+            this.TmrMeteor.Tick += new System.EventHandler(this.TmrMeteor_Tick);
             // 
             // txtuserame
             // 
@@ -128,19 +132,20 @@
             this.stsgame.Text = "Start";
             this.stsgame.UseVisualStyleBackColor = true;
             this.stsgame.Click += new System.EventHandler(this.stsgame_Click);
+            this.stsgame.KeyDown += new System.Windows.Forms.KeyEventHandler(this.stsgame_KeyDown);
             // 
-            // tmrMissiles
+            // TmrMissiles
             // 
-            this.tmrMissiles.Enabled = true;
-            this.tmrMissiles.Interval = 10000;
-            this.tmrMissiles.Tick += new System.EventHandler(this.tmrMissiles_Tick);
+            this.TmrMissiles.Enabled = true;
+            this.TmrMissiles.Interval = 10000;
+            this.TmrMissiles.Tick += new System.EventHandler(this.TmrMissiles_Tick);
             // 
             // txtLives
             // 
             this.txtLives.AutoSize = true;
             this.txtLives.BackColor = System.Drawing.Color.Transparent;
             this.txtLives.ForeColor = System.Drawing.SystemColors.Control;
-            this.txtLives.Location = new System.Drawing.Point(406, 28);
+            this.txtLives.Location = new System.Drawing.Point(20, 108);
             this.txtLives.Name = "txtLives";
             this.txtLives.Size = new System.Drawing.Size(19, 13);
             this.txtLives.TabIndex = 11;
@@ -173,7 +178,7 @@
             this.spaceshipDisplay.BackColor = System.Drawing.Color.Transparent;
             this.spaceshipDisplay.BackgroundImage = global::List.Properties.Resources.spaceship_blue;
             this.spaceshipDisplay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.spaceshipDisplay.Location = new System.Drawing.Point(208, 104);
+            this.spaceshipDisplay.Location = new System.Drawing.Point(205, 108);
             this.spaceshipDisplay.Name = "spaceshipDisplay";
             this.spaceshipDisplay.Size = new System.Drawing.Size(503, 377);
             this.spaceshipDisplay.TabIndex = 14;
@@ -192,12 +197,35 @@
             // PnlGame
             // 
             this.PnlGame.BackColor = System.Drawing.Color.Transparent;
+            this.PnlGame.Controls.Add(this.bossframe);
+            this.PnlGame.Controls.Add(this.spaceshipDisplay);
+            this.PnlGame.Controls.Add(this.LblLives);
+            this.PnlGame.Controls.Add(this.txtLives);
             this.PnlGame.Enabled = false;
-            this.PnlGame.Location = new System.Drawing.Point(-1, 1);
+            this.PnlGame.Location = new System.Drawing.Point(-1, 0);
             this.PnlGame.Name = "PnlGame";
             this.PnlGame.Size = new System.Drawing.Size(917, 628);
             this.PnlGame.TabIndex = 16;
             this.PnlGame.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlGame_Paint);
+            // 
+            // bossframe
+            // 
+            this.bossframe.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.bossframe.BackColor = System.Drawing.Color.Transparent;
+            this.bossframe.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bossframe.Enabled = false;
+            this.bossframe.Location = new System.Drawing.Point(388, 0);
+            this.bossframe.Name = "bossframe";
+            this.bossframe.Size = new System.Drawing.Size(150, 150);
+            this.bossframe.TabIndex = 12;
+            this.bossframe.TabStop = false;
+            this.bossframe.Visible = false;
+            // 
+            // TmrBoss
+            // 
+            this.TmrBoss.Enabled = true;
+            this.TmrBoss.Interval = 10;
+            this.TmrBoss.Tick += new System.EventHandler(this.TmrBoss_Tick);
             // 
             // Form1
             // 
@@ -207,25 +235,25 @@
             this.BackgroundImage = global::List.Properties.Resources.orion_nebula_11107_1920;
             this.ClientSize = new System.Drawing.Size(909, 589);
             this.Controls.Add(this.BtnBack);
-            this.Controls.Add(this.spaceshipDisplay);
             this.Controls.Add(this.btnChange);
             this.Controls.Add(this.txtMissiles);
-            this.Controls.Add(this.txtLives);
             this.Controls.Add(this.stsgame);
             this.Controls.Add(this.txtuserame);
             this.Controls.Add(this.Userame);
             this.Controls.Add(this.txtScore);
             this.Controls.Add(this.LblScore);
-            this.Controls.Add(this.LblLives);
             this.Controls.Add(this.PnlGame);
             this.Name = "Form1";
-            this.Load += new System.EventHandler(this.Form2_Load);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form2_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form2_KeyUp);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.spaceshipDisplay)).EndInit();
+            this.PnlGame.ResumeLayout(false);
+            this.PnlGame.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bossframe)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,22 +261,24 @@
 
         #endregion
 
-        private System.Windows.Forms.Timer tmrShoot;
+        private System.Windows.Forms.Timer TmrShoot;
         private System.Windows.Forms.Timer TmrShip;
         private System.Windows.Forms.Label LblScore;
         private System.Windows.Forms.Label txtScore;
         private System.Windows.Forms.Label LblLives;
         private System.Windows.Forms.Label Userame;
-        public System.Windows.Forms.Timer TmrPlanet;
+        public System.Windows.Forms.Timer TmrMeteor;
         private System.Windows.Forms.TextBox txtuserame;
         private System.Windows.Forms.Button stsgame;
-        private System.Windows.Forms.Timer tmrMissiles;
+        private System.Windows.Forms.Timer TmrMissiles;
         private System.Windows.Forms.Label txtLives;
         private System.Windows.Forms.Label txtMissiles;
         private System.Windows.Forms.Button btnChange;
         private System.Windows.Forms.PictureBox spaceshipDisplay;
         private System.Windows.Forms.Button BtnBack;
         private System.Windows.Forms.Panel PnlGame;
+        private System.Windows.Forms.Timer TmrBoss;
+        private System.Windows.Forms.PictureBox bossframe;
     }
 }
 
