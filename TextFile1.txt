@@ -1,0 +1,20 @@
+            if (bossframe.Location.X > 875 && rightDetect == true && leftDetect == false)
+            {
+                bossframe.Left -= 5;
+                rightDetect = false;
+                leftDetect = true;
+            }
+            else if(rightDetect == true)
+            {
+                bossframe.Left += 5;
+            }
+
+            (private void checkmissles)
+               //Bosslevel = true;
+               // TmrBoss.Enabled = true;
+
+                //bossframe.Visible = true;
+                //bossframe.BackgroundImage = Properties.Resources.Boss;
+
+                //laserframe.Visible = true;
+                //laserframe.BackgroundImage = Properties.Resources.laser;

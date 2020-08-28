@@ -133,21 +133,12 @@ namespace List
             if (Missiles == 0 && checkMissileCount == true)
             { 
                 checkMissileCount = false;
-                MessageBox.Show("next level");
+                MessageBox.Show("Wave 2");
                 level += 1;
                 lives = 50;
                 Missiles = 100;
-                Bosslevel = true;
-                planetenable = false;
 
-                TmrBoss.Enabled = true;
-
-                bossframe.Visible = true;
-                bossframe.BackgroundImage = Properties.Resources.Boss;
-
-                //laserframe.Visible = true;
-                //laserframe.BackgroundImage = Properties.Resources.laser;
-
+                planetenable = true;
             }
             if (Missiles == 0 && checkMissileCount == false)
             {
