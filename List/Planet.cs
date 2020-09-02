@@ -9,9 +9,6 @@ namespace List
 {
     class Planet
     {
-
-       
-
         // declare fields to use in the class
 
         public int x, y, width, height;//variables for the rectangle
@@ -40,7 +37,6 @@ namespace List
         }
         public void movePlanet(Graphics g)
         {
-
                 y += planetspeed.Next(1,10);
                 planetRec.Location = new Point(x, y);
         }

@@ -18,16 +18,14 @@ namespace List
         Random bossy = new Random();
 
         //Create a constructor (initialises the values of the fields)
-        public Boss()
+        public Boss(int displacement)
         {
-            x = ((925-75) / 2);
+            x = displacement;
             y = 10;
-            width = 75;
-            height = 75;
-            BossCraft = Properties.Resources.Boss;
+            width = 40;
+            height = 40;
+            BossCraft = Properties.Resources.planet1;
             BossRec = new Rectangle(x, y, width, height);
-
-           
         }
         public void drawBosscraft(Graphics g)
         {

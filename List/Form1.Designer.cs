@@ -47,9 +47,13 @@
             this.PnlGame = new System.Windows.Forms.Panel();
             this.bossframe = new System.Windows.Forms.PictureBox();
             this.TmrBoss = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.healthgreenbar = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.spaceshipDisplay)).BeginInit();
             this.PnlGame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bossframe)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.healthgreenbar)).BeginInit();
             this.SuspendLayout();
             // 
             // TmrShoot
@@ -155,10 +159,11 @@
             // 
             this.txtMissiles.AutoSize = true;
             this.txtMissiles.BackColor = System.Drawing.Color.Transparent;
+            this.txtMissiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMissiles.ForeColor = System.Drawing.SystemColors.Control;
-            this.txtMissiles.Location = new System.Drawing.Point(24, 545);
+            this.txtMissiles.Location = new System.Drawing.Point(12, 560);
             this.txtMissiles.Name = "txtMissiles";
-            this.txtMissiles.Size = new System.Drawing.Size(19, 13);
+            this.txtMissiles.Size = new System.Drawing.Size(27, 20);
             this.txtMissiles.TabIndex = 12;
             this.txtMissiles.Text = "20";
             // 
@@ -197,8 +202,11 @@
             // PnlGame
             // 
             this.PnlGame.BackColor = System.Drawing.Color.Transparent;
+            this.PnlGame.Controls.Add(this.healthgreenbar);
+            this.PnlGame.Controls.Add(this.pictureBox1);
             this.PnlGame.Controls.Add(this.bossframe);
             this.PnlGame.Controls.Add(this.spaceshipDisplay);
+            this.PnlGame.Controls.Add(this.txtMissiles);
             this.PnlGame.Controls.Add(this.LblLives);
             this.PnlGame.Controls.Add(this.txtLives);
             this.PnlGame.Enabled = false;
@@ -212,6 +220,7 @@
             // 
             this.bossframe.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.bossframe.BackColor = System.Drawing.Color.Transparent;
+            this.bossframe.BackgroundImage = global::List.Properties.Resources.Boss;
             this.bossframe.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.bossframe.Enabled = false;
             this.bossframe.Location = new System.Drawing.Point(388, 0);
@@ -227,6 +236,24 @@
             this.TmrBoss.Interval = 10;
             this.TmrBoss.Tick += new System.EventHandler(this.TmrBoss_Tick);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Red;
+            this.pictureBox1.Location = new System.Drawing.Point(94, 536);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(733, 22);
+            this.pictureBox1.TabIndex = 15;
+            this.pictureBox1.TabStop = false;
+            // 
+            // healthgreenbar
+            // 
+            this.healthgreenbar.BackColor = System.Drawing.Color.Lime;
+            this.healthgreenbar.Location = new System.Drawing.Point(94, 536);
+            this.healthgreenbar.Name = "healthgreenbar";
+            this.healthgreenbar.Size = new System.Drawing.Size(733, 22);
+            this.healthgreenbar.TabIndex = 16;
+            this.healthgreenbar.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -236,7 +263,6 @@
             this.ClientSize = new System.Drawing.Size(909, 589);
             this.Controls.Add(this.BtnBack);
             this.Controls.Add(this.btnChange);
-            this.Controls.Add(this.txtMissiles);
             this.Controls.Add(this.stsgame);
             this.Controls.Add(this.txtuserame);
             this.Controls.Add(this.Userame);
@@ -254,6 +280,8 @@
             this.PnlGame.ResumeLayout(false);
             this.PnlGame.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bossframe)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.healthgreenbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -279,6 +307,8 @@
         private System.Windows.Forms.Panel PnlGame;
         private System.Windows.Forms.Timer TmrBoss;
         private System.Windows.Forms.PictureBox bossframe;
+        private System.Windows.Forms.PictureBox healthgreenbar;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

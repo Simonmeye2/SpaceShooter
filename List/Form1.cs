@@ -28,14 +28,11 @@ namespace List
 
 
         bool left, right,stop;
-        bool leftDetect = true;
-        bool rightDetect = false;
         string move;
         int score = 0;
         int spaceshipID = 1;
         int lives = 10;
         int Missiles = 20;
-        int level = 1;
         int bossy = 0;
         int bossMove;
         public int x, y, width, height;//variables for the rectangle
@@ -43,7 +40,9 @@ namespace List
         bool otherCheckMissileCount = true;
         bool Startgame = false;
         bool Bosslevel = false;
+        bool NextWave = false;
         bool planetenable = true;
+        int wave = 1;
 
         Random planetspeed = new Random();
         Random bossstation = new Random();
@@ -119,32 +118,47 @@ namespace List
                             }
                         }
                     }
-
                         if (Missiles <= 0)
-                    {
-                        p.y = -30;
-                        break;
-                    }
+                        {
+                            p.y = -50;
+                            break;
+                        }
                 }
             }
         }
         private void Checkmissiles()
         {
-            if (Missiles == 0 && checkMissileCount == true)
-            { 
-                checkMissileCount = false;
-                MessageBox.Show("Wave 2");
-                level += 1;
-                lives = 50;
-                Missiles = 100;
+            if (Missiles == 0 && checkMissileCount == true);
+            {
+                NextWave = true;
+                if (Missiles == 0 && NextWave == true)
+                {
+                    wave++;
+                    MessageBox.Show("Wave " + wave);
+                    checkMissileCount = false;
+                    otherCheckMissileCount = true;
+ 
+                    Missiles = 20;
 
-                planetenable = true;
+                    if (wave == 2)
+                    {
+                        NextWave = false;
+                        planetenable = false;
+                        bossframe.Enabled = true;
+                        bossframe.Visible = true;
+                        TmrBoss.Enabled = true;
+                        if (Missiles == 0)
+                        {
+                            MessageBox.Show("The End");
+                        }
+                    }
+                }
             }
             if (Missiles == 0 && checkMissileCount == false)
             {
                 otherCheckMissileCount = false;
-
             }
+            
             txtMissiles.Text = Missiles.ToString();// display number of missiles
 
             if (Missiles == 0 && TmrMeteor.Enabled == true)
@@ -277,12 +291,12 @@ namespace List
         }
         private void TmrBoss_Tick(object sender, EventArgs e)
         {
-
             bossMove = bossMovement.Next(-40, 40);
-            if (bossframe.Location.X < 850 && bossframe.Location.X > 50)
+            if (bossframe.Location.X <= ClientSize.Width)
             {
                 bossframe.Left += bossMove;
             }
+
         }
         private void stsgame_KeyDown(object sender, KeyEventArgs e)
         {
@@ -348,11 +362,17 @@ namespace List
                         txtScore.Text = score.ToString();
                         break;
                     }
-
+                    foreach (Boss b in boss)
+                    {
+                        if (m.missileRec.IntersectsWith(b.BossRec))
+                        {
+                            healthgreenbar.Location = new Point(22, 311);
+                            break;
+                        }
+                    }
                 }
             }
-            
-            this.Invalidate();
+                this.Invalidate();
            
         }
     }

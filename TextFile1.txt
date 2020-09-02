@@ -18,3 +18,19 @@
 
                 //laserframe.Visible = true;
                 //laserframe.BackgroundImage = Properties.Resources.laser;
+
+
+                Missiles = 20;
+
+                    if (wave == 2)
+                    {
+                        planetenable = false;
+                        bossframe.Enabled = true;
+                        bossframe.Visible = true;
+
+                        bossMove = bossMovement.Next(-40, 40);
+                        if (bossframe.Location.X <= ClientSize.Width)
+                        {
+                            bossframe.Left += bossMove;
+                        }
+                    }
