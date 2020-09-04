@@ -45,15 +45,12 @@
             this.spaceshipDisplay = new System.Windows.Forms.PictureBox();
             this.BtnBack = new System.Windows.Forms.Button();
             this.PnlGame = new System.Windows.Forms.Panel();
+            this.healthBar = new System.Windows.Forms.ProgressBar();
             this.bossframe = new System.Windows.Forms.PictureBox();
             this.TmrBoss = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.healthgreenbar = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.spaceshipDisplay)).BeginInit();
             this.PnlGame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bossframe)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.healthgreenbar)).BeginInit();
             this.SuspendLayout();
             // 
             // TmrShoot
@@ -202,8 +199,7 @@
             // PnlGame
             // 
             this.PnlGame.BackColor = System.Drawing.Color.Transparent;
-            this.PnlGame.Controls.Add(this.healthgreenbar);
-            this.PnlGame.Controls.Add(this.pictureBox1);
+            this.PnlGame.Controls.Add(this.healthBar);
             this.PnlGame.Controls.Add(this.bossframe);
             this.PnlGame.Controls.Add(this.spaceshipDisplay);
             this.PnlGame.Controls.Add(this.txtMissiles);
@@ -216,14 +212,26 @@
             this.PnlGame.TabIndex = 16;
             this.PnlGame.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlGame_Paint);
             // 
+            // healthBar
+            // 
+            this.healthBar.BackColor = System.Drawing.Color.Red;
+            this.healthBar.Enabled = false;
+            this.healthBar.ForeColor = System.Drawing.Color.Lime;
+            this.healthBar.Location = new System.Drawing.Point(57, 560);
+            this.healthBar.Name = "healthBar";
+            this.healthBar.Size = new System.Drawing.Size(841, 21);
+            this.healthBar.TabIndex = 17;
+            this.healthBar.Value = 100;
+            this.healthBar.Visible = false;
+            // 
             // bossframe
             // 
             this.bossframe.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.bossframe.BackColor = System.Drawing.Color.Transparent;
-            this.bossframe.BackgroundImage = global::List.Properties.Resources.Boss;
+            this.bossframe.BackgroundImage = global::List.Properties.Resources.boss;
             this.bossframe.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.bossframe.Enabled = false;
-            this.bossframe.Location = new System.Drawing.Point(388, 0);
+            this.bossframe.Location = new System.Drawing.Point(25, 385);
             this.bossframe.Name = "bossframe";
             this.bossframe.Size = new System.Drawing.Size(150, 150);
             this.bossframe.TabIndex = 12;
@@ -235,24 +243,6 @@
             this.TmrBoss.Enabled = true;
             this.TmrBoss.Interval = 10;
             this.TmrBoss.Tick += new System.EventHandler(this.TmrBoss_Tick);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Red;
-            this.pictureBox1.Location = new System.Drawing.Point(94, 536);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(733, 22);
-            this.pictureBox1.TabIndex = 15;
-            this.pictureBox1.TabStop = false;
-            // 
-            // healthgreenbar
-            // 
-            this.healthgreenbar.BackColor = System.Drawing.Color.Lime;
-            this.healthgreenbar.Location = new System.Drawing.Point(94, 536);
-            this.healthgreenbar.Name = "healthgreenbar";
-            this.healthgreenbar.Size = new System.Drawing.Size(733, 22);
-            this.healthgreenbar.TabIndex = 16;
-            this.healthgreenbar.TabStop = false;
             // 
             // Form1
             // 
@@ -280,8 +270,6 @@
             this.PnlGame.ResumeLayout(false);
             this.PnlGame.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bossframe)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.healthgreenbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -307,8 +295,7 @@
         private System.Windows.Forms.Panel PnlGame;
         private System.Windows.Forms.Timer TmrBoss;
         private System.Windows.Forms.PictureBox bossframe;
-        private System.Windows.Forms.PictureBox healthgreenbar;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ProgressBar healthBar;
     }
 }
 

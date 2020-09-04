@@ -1,41 +1,41 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Drawing;
 
 namespace List
 {
     class Boss
-    { // declare fields to use in the class
+    {
+        // declare fields to use in the class
 
         public int x, y, width, height;//variables for the rectangle
-        public Image BossCraft;//variable for the planet's image
+        public Image bossImage;//variable for the planet's image
 
         public Rectangle BossRec;//variable for a rectangle to place our image in
-        Random bossy = new Random();
 
         //Create a constructor (initialises the values of the fields)
-        public Boss(int displacement)
+        public Boss()
         {
-            x = displacement;
+            x = 20;
             y = 10;
-            width = 40;
-            height = 40;
-            BossCraft = Properties.Resources.planet1;
+            width = 150;
+            height = 150;
+            bossImage = Properties.Resources.boss;
             BossRec = new Rectangle(x, y, width, height);
         }
-        public void drawBosscraft(Graphics g)
+        public void drawBoss(Graphics b)
+        {
+            bossImage = Properties.Resources.boss;
+        }
+        // Methods for the Planet class
+        public void draw(Graphics b)
         {
             BossRec = new Rectangle(x, y, width, height);
-            g.DrawImage(BossCraft, BossRec);
-        }
-        public void moveBoss(Graphics g)
-        {
-            y = bossy.Next(10, 300);
-            BossRec.Location = new Point(x, y);
+            b.DrawImage(bossImage, BossRec);
         }
     }
 }

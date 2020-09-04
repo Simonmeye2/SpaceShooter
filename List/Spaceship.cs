@@ -18,13 +18,13 @@ namespace List
         public Spaceship()
         {
             x = 10;
-            y = 520;
+            y = 480;
             width = 73;
             height = 69;
             
             spaceRec = new Rectangle(x, y, width, height);
         }
-
+       
         public void drawSpaceship(Graphics g, int spaceshipID)
         {
             if (spaceshipID == 1)

@@ -41,6 +41,5 @@ namespace List
                 planetRec.Location = new Point(x, y);
         }
     }
-
 }
 

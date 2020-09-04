@@ -15,17 +15,14 @@ namespace List
 {
     public partial class Form1 : Form
     {
-        Graphics g; //declare a graphics object called g
-        Spaceship spaceship = new Spaceship();//create object called spaceship 
-                                              //declare a list  missiles from the missile class
-        
+        Graphics g;
+        Spaceship spaceship = new Spaceship();
+        Boss bossFrame = new Boss();
+
         List<Missile> missiles = new List<Missile>();
-        // declare space for an array of 7 objects called planet 
         List<Planet> planets = new List<Planet>();
-        List<Boss> boss = new List<Boss>();
         Random yspeed = new Random();
         Random bossMovement = new Random();
-
 
         bool left, right,stop;
         string move;
@@ -33,19 +30,18 @@ namespace List
         int spaceshipID = 1;
         int lives = 10;
         int Missiles = 20;
-        int bossy = 0;
+        //int bossy = 0;
         int bossMove;
         public int x, y, width, height;//variables for the rectangle
         bool checkMissileCount = true;
         bool otherCheckMissileCount = true;
         bool Startgame = false;
-        bool Bosslevel = false;
+        //bool Bosslevel = false;
         bool NextWave = false;
         bool planetenable = true;
         int wave = 1;
 
         Random planetspeed = new Random();
-        Random bossstation = new Random();
 
         public Form1()
         {
@@ -64,8 +60,8 @@ namespace List
         }
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-
             g = e.Graphics;
+
             if (Startgame == true)
             {
                 spaceship.drawSpaceship(g, spaceshipID);
@@ -74,15 +70,11 @@ namespace List
                     if (otherCheckMissileCount == true)
                     {
                         m.draw(g);
-
                     }
                 }
-
             }
-           
             if (planetenable == true)
             {
-
                 foreach (Planet p in planets)
                 {
                     if (Startgame == true)
@@ -97,38 +89,23 @@ namespace List
                     }
                     if (p.planetRec.IntersectsWith(spaceship.spaceRec) && stop == false)
                     {
-
                         //reset planet[i] back to top of panel
                         p.y = 30; // set  y value of planetRec
                         lives -= 1;// lose a life
                         txtLives.Text = lives.ToString();// display number of lives
                         CheckLives();
                     }
-                    if (Bosslevel == true)
+                    if (Missiles <= 0)
                     {
-                        foreach (Boss b in boss)
-                        {
-                            b.drawBosscraft(g);
-                            bossy = bossstation.Next(10, 300);
-
-
-                            if (b.y >= ClientSize.Height && stop == false)
-                            {
-                                b.y = -20;
-                            }
-                        }
+                        p.y = -50;
+                        break;
                     }
-                        if (Missiles <= 0)
-                        {
-                            p.y = -50;
-                            break;
-                        }
                 }
             }
         }
         private void Checkmissiles()
         {
-            if (Missiles == 0 && checkMissileCount == true);
+            if (Missiles == 0 && checkMissileCount == true)
             {
                 NextWave = true;
                 if (Missiles == 0 && NextWave == true)
@@ -140,12 +117,16 @@ namespace List
  
                     Missiles = 20;
 
-                    if (wave == 2)
+                    if (wave == 2) //boss level
                     {
+                        healthBar.Enabled = true;
+                        healthBar.Visible = true;
+
+                        Missiles = 30;
                         NextWave = false;
                         planetenable = false;
-                        bossframe.Enabled = true;
-                        bossframe.Visible = true;
+                        //bossframe.Enabled = true;
+                        //bossframe.Visible = true;
                         TmrBoss.Enabled = true;
                         if (Missiles == 0)
                         {
@@ -194,9 +175,7 @@ namespace List
                 Missiles -= 1;
                 txtMissiles.Text = Missiles.ToString();// display number of missiles
                 Checkmissiles();
-
-            }
-           
+            }  
         }
         private void Form2_KeyUp(object sender, KeyEventArgs e)
         {
@@ -292,11 +271,10 @@ namespace List
         private void TmrBoss_Tick(object sender, EventArgs e)
         {
             bossMove = bossMovement.Next(-40, 40);
-            if (bossframe.Location.X <= ClientSize.Width)
-            {
-                bossframe.Left += bossMove;
-            }
-
+            //if (bossframe.Location.X <= ClientSize.Width)
+            //{
+                //bossframe.Left += bossMove;
+            //}
         }
         private void stsgame_KeyDown(object sender, KeyEventArgs e)
         {
@@ -352,28 +330,11 @@ namespace List
                         score = score + 5;
                         txtScore.Text = score.ToString();
                         break;
-                        
                     }
-                    if (m.missileRec.IntersectsWith(p.planetRec))
-                    {
-                        m.y = -20;// relocate planet to the top of the form
-                        planets.Remove(p);
-                        score = score + 5;
-                        txtScore.Text = score.ToString();
-                        break;
-                    }
-                    foreach (Boss b in boss)
-                    {
-                        if (m.missileRec.IntersectsWith(b.BossRec))
-                        {
-                            healthgreenbar.Location = new Point(22, 311);
-                            break;
-                        }
-                    }
-                }
+
+                }   
             }
-                this.Invalidate();
-           
+            this.Invalidate();
         }
     }
 }
