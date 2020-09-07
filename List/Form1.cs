@@ -137,7 +137,7 @@ namespace List
 
                     if (wave == 2) //stupid retard boss level
                     {
-                        bossRect.Location = new Point(ClientSize.Width / 2, 0);
+                        bossRect.Location = new Point(ClientSize.Width / 4, 0);
 
                         healthBar.Enabled = true;
                         healthBar.Visible = true;
