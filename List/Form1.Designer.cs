@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.TmrShoot = new System.Windows.Forms.Timer(this.components);
             this.TmrShip = new System.Windows.Forms.Timer(this.components);
             this.LblScore = new System.Windows.Forms.Label();
@@ -41,13 +42,13 @@
             this.TmrMissiles = new System.Windows.Forms.Timer(this.components);
             this.txtLives = new System.Windows.Forms.Label();
             this.txtMissiles = new System.Windows.Forms.Label();
-            this.btnChange = new System.Windows.Forms.Button();
             this.spaceshipDisplay = new System.Windows.Forms.PictureBox();
             this.BtnBack = new System.Windows.Forms.Button();
             this.PnlGame = new System.Windows.Forms.Panel();
             this.healthBar = new System.Windows.Forms.ProgressBar();
             this.bossframe = new System.Windows.Forms.PictureBox();
             this.TmrBoss = new System.Windows.Forms.Timer(this.components);
+            this.TmrLaser = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.spaceshipDisplay)).BeginInit();
             this.PnlGame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bossframe)).BeginInit();
@@ -164,17 +165,6 @@
             this.txtMissiles.TabIndex = 12;
             this.txtMissiles.Text = "20";
             // 
-            // btnChange
-            // 
-            this.btnChange.BackColor = System.Drawing.Color.Transparent;
-            this.btnChange.Location = new System.Drawing.Point(717, 291);
-            this.btnChange.Name = "btnChange";
-            this.btnChange.Size = new System.Drawing.Size(75, 23);
-            this.btnChange.TabIndex = 13;
-            this.btnChange.Text = "Next";
-            this.btnChange.UseVisualStyleBackColor = false;
-            this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
-            // 
             // spaceshipDisplay
             // 
             this.spaceshipDisplay.BackColor = System.Drawing.Color.Transparent;
@@ -188,12 +178,14 @@
             // 
             // BtnBack
             // 
-            this.BtnBack.Location = new System.Drawing.Point(123, 291);
+            this.BtnBack.BackColor = System.Drawing.Color.Transparent;
+            this.BtnBack.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnBack.BackgroundImage")));
+            this.BtnBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnBack.Location = new System.Drawing.Point(116, 261);
             this.BtnBack.Name = "BtnBack";
-            this.BtnBack.Size = new System.Drawing.Size(75, 23);
+            this.BtnBack.Size = new System.Drawing.Size(75, 75);
             this.BtnBack.TabIndex = 15;
-            this.BtnBack.Text = "Back";
-            this.BtnBack.UseVisualStyleBackColor = true;
+            this.BtnBack.UseVisualStyleBackColor = false;
             this.BtnBack.Click += new System.EventHandler(this.BtnBack_Click);
             // 
             // PnlGame
@@ -244,6 +236,10 @@
             this.TmrBoss.Interval = 10;
             this.TmrBoss.Tick += new System.EventHandler(this.TmrBoss_Tick);
             // 
+            // TmrLaser
+            // 
+            this.TmrLaser.Interval = 1000;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -252,7 +248,6 @@
             this.BackgroundImage = global::List.Properties.Resources.orion_nebula_11107_1920;
             this.ClientSize = new System.Drawing.Size(909, 589);
             this.Controls.Add(this.BtnBack);
-            this.Controls.Add(this.btnChange);
             this.Controls.Add(this.stsgame);
             this.Controls.Add(this.txtuserame);
             this.Controls.Add(this.Userame);
@@ -289,13 +284,13 @@
         private System.Windows.Forms.Timer TmrMissiles;
         private System.Windows.Forms.Label txtLives;
         private System.Windows.Forms.Label txtMissiles;
-        private System.Windows.Forms.Button btnChange;
         private System.Windows.Forms.PictureBox spaceshipDisplay;
         private System.Windows.Forms.Button BtnBack;
         private System.Windows.Forms.Panel PnlGame;
         private System.Windows.Forms.Timer TmrBoss;
         private System.Windows.Forms.PictureBox bossframe;
         private System.Windows.Forms.ProgressBar healthBar;
+        private System.Windows.Forms.Timer TmrLaser;
     }
 }
 
