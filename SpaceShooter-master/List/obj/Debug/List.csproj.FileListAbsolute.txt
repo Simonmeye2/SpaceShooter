@@ -1,0 +1,10 @@
+C:\Users\Simon Meyer\OneDrive\Desktop\New folder\SpaceShooter-master\List\bin\Debug\List.exe.config
+C:\Users\Simon Meyer\OneDrive\Desktop\New folder\SpaceShooter-master\List\bin\Debug\List.exe
+C:\Users\Simon Meyer\OneDrive\Desktop\New folder\SpaceShooter-master\List\bin\Debug\List.pdb
+C:\Users\Simon Meyer\OneDrive\Desktop\New folder\SpaceShooter-master\List\obj\Debug\List.csprojAssemblyReference.cache
+C:\Users\Simon Meyer\OneDrive\Desktop\New folder\SpaceShooter-master\List\obj\Debug\List.Form1.resources
+C:\Users\Simon Meyer\OneDrive\Desktop\New folder\SpaceShooter-master\List\obj\Debug\List.Properties.Resources.resources
+C:\Users\Simon Meyer\OneDrive\Desktop\New folder\SpaceShooter-master\List\obj\Debug\List.csproj.GenerateResource.cache
+C:\Users\Simon Meyer\OneDrive\Desktop\New folder\SpaceShooter-master\List\obj\Debug\List.csproj.CoreCompileInputs.cache
+C:\Users\Simon Meyer\OneDrive\Desktop\New folder\SpaceShooter-master\List\obj\Debug\List.exe
+C:\Users\Simon Meyer\OneDrive\Desktop\New folder\SpaceShooter-master\List\obj\Debug\List.pdb
